@@ -6,18 +6,16 @@ const getTasks = (req, res) => {
 }
 
 const createTask = (req, res) => {
-    const { title, description, priority } = req.body;
+    const { title, description, priority, dueDate } = req.body;
 
-    if (!title) {
-        return res.status(400).json({ message: 'Please add a task title' });
-    }
     const newTask = {
         id: currentId++,
         title,
         description: description || '',
         completed: false,
         createdAt: new Date(),
-        priority: priority || 'medium', // if not included, medium will be the default priority
+        dueDate: dueDate || null,
+        priority: priority || 'medium',
     };
     tasks.push(newTask);
     res.status(201).json(newTask);
